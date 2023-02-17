@@ -1,0 +1,72 @@
+* { /* removes basic default CSS styles */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+}
+
+body{
+  background-color: 	#fff5ee;
+  /* makes the background a ombre of two colors, could be cool to add */
+  /* background-image: linear-gradient(120deg, #b0e0e6,	#d8bfd8); */
+  color: 	#1e90ff; /* color of writing and such */
+  font-family: 'Noto Serif', serif;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 6rem; /* size of header */
+   /* addds these settings to both header and form (input text for location) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.0001px;
+  max-height: 14vh;
+}
+
+.home-form {
+  min-height: 15vh; /* for spacing between h2 and addLocation item */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-size: 1.3rem;
+  justify-content: center;
+  display: flex;
+  align-items:center;
+  margin-top: 0.00001px;
+  margin-left: 475px;
+
+
+}
+
+
+form input, /* from inside Form function */
+form button {
+  padding: 0.4rem; /* size of text input bar and + symbol */
+  font-size: 1.3rem;
+  border: none;
+  background: white;
+}
+
+
+/* Review Form */
+.review-form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 5% 15%;
+}
+
+.review-input {
+  color: black;
+  background-color: azure;
+}
+
+.MuiFormHelperText-root.Mui-error {
+  background-color: #fff5ee;
+  margin: 0;
+  padding: 5px;
+}
+
