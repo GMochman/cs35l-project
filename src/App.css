@@ -65,6 +65,7 @@ form button {
 .user img {
   font-size: 15px;
   border-radius: 50%;
+  margin-right: 8px;
   margin-left: 8px;
 }
 
@@ -195,3 +196,11 @@ a {
     box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
     cursor: not-allowed;
   }
+
+.reviewContainer {
+  text-align: center;
+}
+
+.footer .likes {
+ margin-bottom: 8px;
+}
