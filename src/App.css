@@ -50,6 +50,24 @@ form button {
     background: white;
 }
 
+.user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.user p {
+  font-size: 15px;
+  margin-right: 10px;
+  color: white;
+}
+.user img {
+  font-size: 15px;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+
 nav {
     margin: 0;
     width: 100%;

@@ -1,6 +1,7 @@
 import React from "react";
 import Form from '../components/addLocation'
 
+
 function Home() {
     return(
     <div className="homePage">
