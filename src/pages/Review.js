@@ -3,6 +3,7 @@ import { db, auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
 
+
 export const Review = (props) => {
     const { review } = props;
     const [user] = useAuthState(auth);
@@ -14,7 +15,7 @@ export const Review = (props) => {
     const likesDoc = query(likesRef, where("reviewId", "==", review.id));
 
     const getLikes = async () => {
-        const data = await getDocs(likesDoc)
+        const data = await getDocs(likesDoc);
         setLikes(data.docs.map((doc) => ({userId: doc.data().userId, likeId: doc.id})));
     };
 
@@ -39,15 +40,16 @@ export const Review = (props) => {
             where("userId", "==", user?.uid) 
            );
 
-           const toBeDeletedData = await getDocs(queryLike)
+           const toBeDeletedData = await getDocs(queryLike);
            const likeId = toBeDeletedData.docs[0].id;
            const toBeDeleted = doc(db, "likes", likeId); 
            await deleteDoc(toBeDeleted);
            if (user) {
-           setLikes((prev) => prev && prev.filter((like) => like.id !== likeId));
+                setLikes(
+                    (prev) => prev && prev.filter((like) => like.likeId !== likeId));
          }
        } catch (err) {
-           console.log(err)
+           console.log(err);
         }
        };
     
