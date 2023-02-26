@@ -24,7 +24,7 @@ h1 {
     max-height: 14vh;
 }
 
-form {
+#add-location-form {
     min-height: 15vh; /* for spacing between h2 and addLocation item */
     display: flex;
     justify-content: center;
@@ -120,7 +120,8 @@ a {
   }
   
   .inputGp input,
-  .inputGp textarea {
+  .inputGp textarea,
+  select {
     font-size: 18px;
     border: none;
     border-radius: 2px;
