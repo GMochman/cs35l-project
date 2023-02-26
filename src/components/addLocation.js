@@ -7,7 +7,7 @@ const Form = () => {
         <form id="add-location-form">
             <input type="text" className="input-location" />
             <button className="add-location" type="submit"> 
-                <i class="fa-solid fa-plus"></i> 
+                <i className="fa-solid fa-plus"></i> 
             </button> 
         </form>
     );

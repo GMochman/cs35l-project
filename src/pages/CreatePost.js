@@ -3,33 +3,52 @@ import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase-config";
 
 function CreatePost({ user }) {
-  const [location, setLocation] = useState(null);
+  const [locationId, setLocationId] = useState(null);
   const [title, setTitle] = useState("");
   const [post, setPost] = useState("");
   const reviewsRef = collection(db, "reviews");
   const locationsRef = collection(db, "locations");
-  let locations = [
-    { _id: "1", name: "rende" },
-    { _id: "2", name: "study" },
-  ];
+  let [locations, setLocations] = useState([]);
 
-  // useEffect(async () => {
-  //   locations = await getDocs(locationsRef);
-  // }, []);
+  async function getLocations() {
+    try {
+      const response = await getDocs(locationsRef);
+      let tempArr = [];
+      response.forEach((doc) => {
+        let tempObj = { name: doc.data().name, id: doc.id };
+        tempArr.push(tempObj);
+      });
+      setLocations(tempArr);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getLocations();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!user) {
+      alert("Please log in first");
+    }
+
     try {
-      await addDoc(reviewsRef, {
-        user: user,
-        location,
-        location,
-        title: title,
-        post: post,
-        likes: {},
-        date_posted: Date.now(),
-      });
-      document.getElementyById("review-form").reset();
+      // await addDoc(reviewsRef, {
+      //   userName: user.displayName,
+      //   userId: user.uid,
+      //   locationId: locationId,
+      //   title: title,
+      //   post: post,
+      //   likes: {},
+      //   date_posted: Date.now()
+      // });
+      setLocationId(null);
+      setTitle("");
+      setPost("");
+      document.getElementById("review-form").reset();
     } catch (err) {
       console.log(err);
     }
@@ -44,12 +63,12 @@ function CreatePost({ user }) {
             <label htmlFor="location"> Choose a location:</label>
             <select
               name="location"
-              onSelect={(e) => setLocation(e.target.value)}
+              onChange={(e) => setLocationId(e.target.value)}
             >
               <option value="">--Please choose an option--</option>
               {locations.map((location) => {
                 return (
-                  <option key={location._id} value={location._id}>
+                  <option key={location.id} value={location.id}>
                     {location.name}
                   </option>
                 );

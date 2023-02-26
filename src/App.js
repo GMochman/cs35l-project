@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import Login from "./pages/Login";
 import { useState } from "react";
-import { signOut } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [user] = useAuthState(auth);
+
+  useEffect(() => { 
+    if (user) {
+      setIsAuth(true);
+    }
+  }, [user])
 
   const signUserOut = () => {
     signOut(auth).then(() => {

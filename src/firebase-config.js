@@ -15,7 +15,7 @@ const firebaseConfig = {
   storageBucket: "foodies-fe766.appspot.com",
   messagingSenderId: "908759239753",
   appId: "1:908759239753:web:13c30ef790c1440fb8c398",
-  measurementId: "G-BRK089D5GX"
+  measurementId: "G-BRK089D5GX",
 };
 
 // Initialize Firebase
