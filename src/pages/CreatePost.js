@@ -36,15 +36,14 @@ function CreatePost({ user }) {
     }
 
     try {
-      // await addDoc(reviewsRef, {
-      //   userName: user.displayName,
-      //   userId: user.uid,
-      //   locationId: locationId,
-      //   title: title,
-      //   post: post,
-      //   likes: {},
-      //   date_posted: Date.now()
-      // });
+      await addDoc(reviewsRef, {
+        userName: user.displayName,
+        userId: user.uid,
+        locationId: locationId,
+        title: title,
+        post: post,
+        date_posted: Date.now()
+      });
       setLocationId(null);
       setTitle("");
       setPost("");
