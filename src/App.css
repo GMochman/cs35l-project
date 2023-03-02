@@ -88,6 +88,11 @@ a {
     font-size: 18px;
   }
 
+  a:hover {
+    text-decoration: underline;
+    color: blue;
+  }
+
   .createPostPage {
     width: 100%;
     height: calc(100vh - 80px);
