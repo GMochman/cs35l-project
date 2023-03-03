@@ -1,12 +1,12 @@
-import React from 'react'; // import from node modules
+import React, { useState, useEffect } from 'react';
 
 
 // create a component
-const Form = ({placeHolder}) => {
+const Form = ({placeHolder, isSearching}) => {
     return(
         <form>
             <div className="search-input">
-                <input type="text" placeholder={placeHolder}/>
+                <input type="text" placeholder={placeHolder} onChange={isSearching}/>
                 <button className="search-locations" type="submit"> 
                     <i class="fa-solid fa-magnifying-glass"></i> 
                 </button> 

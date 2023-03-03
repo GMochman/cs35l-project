@@ -7,6 +7,8 @@ function Home({ isAuth }) {
   const [postLists, setPostList] = useState([]);
   const postsCollectionRef = collection(db, "posts");
 
+  const [searchKeyword, setSearchKeyword] = useState(""); 
+
   useEffect(() => {
     const getPosts = async() => {
       const data = await getDocs(postsCollectionRef);
@@ -27,8 +29,14 @@ function Home({ isAuth }) {
       <div>
         <h2>at ucla</h2>
       </div>
-      <Form placeHolder={"Find a Location"}/>
-      {postLists.map((post) =>{
+      <Form placeHolder={"Find a Location"} isSearching={(event) => 
+        { setSearchKeyword(event.target.value)}}/> 
+      {postLists.filter((post)=> {
+        if (searchKeyword == "") {
+          return post;
+        } else if (post.title.toLowerCase().includes(searchKeyword.toLowerCase())) {
+          return post;
+        }}).map((post) =>{
         return (
         <div className="post">
           <div className="postHeader">
@@ -56,3 +64,6 @@ function Home({ isAuth }) {
 }
 
 export default Home;
+
+
+
