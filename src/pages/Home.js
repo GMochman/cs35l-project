@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Form from '../components/addLocation';
+import Form from '../components/search';
 import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../firebase-config';
 
@@ -27,7 +27,7 @@ function Home({ isAuth }) {
       <div>
         <h2>at ucla</h2>
       </div>
-      <Form />
+      <Form placeHolder={"Find a Location"}/>
       {postLists.map((post) =>{
         return (
         <div className="post">
