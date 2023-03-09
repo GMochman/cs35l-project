@@ -34,7 +34,8 @@ function Home({ isAuth }) {
       {postLists.filter((post)=> {
         if (searchKeyword == "") {
           return post;
-        } else if (post.title.toLowerCase().includes(searchKeyword.toLowerCase())) {
+        } else if (post.title.toLowerCase().includes(searchKeyword.toLowerCase()) || 
+        post.postText.toLowerCase().includes(searchKeyword.toLowerCase()) || post.author.name.toLowerCase().includes(searchKeyword.toLowerCase())) {
           return post;
         }}).map((post) =>{
         return (
