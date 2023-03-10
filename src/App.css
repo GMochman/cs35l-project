@@ -303,3 +303,8 @@ a {
   .dropdown-item:hover{
     background-color: #757575;
   }
+
+  .dropdown-item.selected {
+    background-color: #0d6efd;
+    color: #fff;
+  }
