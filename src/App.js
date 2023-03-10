@@ -7,11 +7,17 @@ import Login from './pages/Login';
 import { signOut } from 'firebase/auth';
 import { auth } from "./firebase-config";
 import { useAuthState} from 'react-firebase-hooks/auth';
+import Dropdown from "./components/Dropdown"
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [user] = useAuthState(auth);
   
+  const options = [ {value: "most_recent", label: "Most Recent"}, 
+  {value: "least_recent", label: "Least Recent"}, 
+  {value: "most_liked", label: "Most Liked"},
+  {value: "least_liked", label: "Least Liked"} ];
+
   const signUserOut = () => {
     signOut(auth).then(() => {
       localStorage.clear();
@@ -48,6 +54,7 @@ function App() {
       <Route path="/createpost" element={<CreatePost isAuth={isAuth} />} />
       <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
     </Routes>
+    <Dropdown placeHolder={"Sort by..."} options={options}/>
   </Router>
   );
 }
