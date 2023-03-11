@@ -60,22 +60,20 @@ export const Review = (props) => {
     }, []);
 
     return (
-        <div className="reviewContainer">
+        <div className="post">
+          <div className="postHeader">
             <div className="title">
-                <h3>{review.title}</h3>
-            </div>
-            <div className="body">
-                <p>{review.description}</p>
-            </div>
-
-            <div className="footer">
-                <p>From: {review.username}</p>
-                {likes && <p className="likes"> Likes: {likes?.length} </p>}
-                <button onClick={isLikedByUser ? unLike : addLike}>
-                    {isLikedByUser ? <img src={'/images/thumbsdown.png'} height="20px"/> : <img src={'/images/thumbsup.png'} height="20px"/>}
-                </button>
-                <br></br><br></br>
-            </div>
+              <h3>{review.title}</h3>
+            </div>       
+          </div>
+          <div className="postTextContainer">{review.description}</div>
+          <h4 className="userName">@{review.username}</h4>
+          <div className="likeContainer">
+            {likes && <p className="likes"> Likes: {likes?.length} </p>} 
+            <button onClick={isLikedByUser ? unLike : addLike}>
+                {isLikedByUser ? <img src={'/images/thumbsdown.png'} height="20px"/> : <img src={'/images/thumbsup.png'} height="20px"/>}
+            </button>
+           </div>
         </div>
     );
 };
