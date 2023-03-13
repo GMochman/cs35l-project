@@ -1,18 +1,31 @@
-import { addDoc, getDocs, collection, query, where, deleteDoc, doc } from "firebase/firestore";
+import { addDoc, getDoc, getDocs, collection, query, where, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom"
 
 
 export const Review = (props) => {
-    const { review } = props;
+    // const { review } = props;
+    // const reviewId = review.id
+    const { reviewId } = useParams();
+    const reviewsRef = doc(db, "reviews", reviewId);
+    const [review, setReview] = useState(null);
+    const getReview = async () => {
+        const doc = await getDoc(reviewsRef);
+        setReview(doc.data());
+    }
+    useEffect(() => {
+        getReview();
+    }, []);
+
     const [user] = useAuthState(auth);
 
     const [likes, setLikes] = useState(null);
 
     const likesRef = collection(db, "likes");
 
-    const likesDoc = query(likesRef, where("reviewId", "==", review.id));
+    const likesDoc = query(likesRef, where("reviewId", "==", reviewId));
 
     const getLikes = async () => {
         const data = await getDocs(likesDoc);
@@ -21,7 +34,7 @@ export const Review = (props) => {
 
     const addLike = async () => {
      try { 
-        const newDoc = await addDoc(likesRef, { userId: user?.uid, reviewId: review.id }); 
+        const newDoc = await addDoc(likesRef, { userId: user?.uid, reviewId: reviewId }); 
         if (user) {
         setLikes((prev) => prev 
             ? [...prev, {userId: user.uid, likeId: newDoc.id }]
@@ -36,7 +49,7 @@ export const Review = (props) => {
     const unLike = async () => {
         try { 
             const queryLike = query(likesRef, 
-            where("reviewId", "==", review.id), 
+            where("reviewId", "==", reviewId), 
             where("userId", "==", user?.uid) 
            );
 
@@ -63,11 +76,11 @@ export const Review = (props) => {
         <div className="post">
           <div className="postHeader">
             <div className="title">
-              <h3>{review.title}</h3>
+              <h3>{review?.title}</h3>
             </div>       
           </div>
-          <div className="postTextContainer">{review.description}</div>
-          <h4 className="userName">@{review.username}</h4>
+          <div className="postTextContainer">{review?.description}</div>
+          <h4 className="userName">@{review?.username}</h4>
           <div className="likeContainer">
             {likes && <p className="likes"> Likes: {likes?.length} </p>} 
             <button onClick={isLikedByUser ? unLike : addLike}>

@@ -1,11 +1,10 @@
-import React from "react";
-import Form from '../components/addLocation'
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { useEffect, useState } from 'react';
-import { Review } from "./Review.js";
+import { Link } from "react-router-dom"
+import { Review } from './Review'
 
-function Home() {
+export const Reviews = () => {
   const [reviewsList, setReviewsList] = useState(null);
   const reviewsRef = collection(db, "reviews");
 
@@ -20,24 +19,20 @@ function Home() {
       getReviews();
   }, []);
 
-  // console.log(reviewsList)
-  return(
-    <div className="homePage">
-      <h1>The Foodies</h1>
+  return (
+    <div>
+      {reviewsList?.map((review) => (
       <div>
-        <h2>at ucla</h2>
+        <Link to={review.id}>
+            <div className="review-snippets">
+                {review.title}
+            </div>
+        </Link>
+        {/* {reviewsList?.map((review) => ( */}
+        {/* <Review review={review}/> */}
+        {/* ))} */}
       </div>
-
-      <Form />
-
-      {/* <div> */}
-      {/*   {reviewsList?.map((review) => ( */}
-      {/*   <Review review={review}/> */}
-      {/*   ))} */}
-      {/* </div> */}
-
+      ))}
     </div>
-  );
+  )
 }
-
-export default Home;
