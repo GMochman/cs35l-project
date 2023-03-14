@@ -1,5 +1,5 @@
 import React from "react";
-import Form from '../components/addLocation'
+import Form from '../components/search'
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { useEffect, useState } from 'react';
