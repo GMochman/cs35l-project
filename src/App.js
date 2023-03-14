@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from './pages/Home';
 import CreatePost from './pages/create-post/CreatePost';
 import Login from './pages/Login';
-import { Reviews } from './pages/Reviews';
-import { Review } from './pages/Review';
+import { Restaurants } from './pages/Restaurants';
+import { RestaurantReviews } from './pages/RestaurantReviews';
 import { useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from "./firebase-config";
@@ -54,8 +54,8 @@ function App() {
     </nav>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/reviews" element={<Reviews />} />
-      <Route path="/reviews/:reviewId" element={<Review />} />
+      <Route path="/reviews" element={<Restaurants />} />
+      <Route path="/reviews/:encodedRestaurantName" element={<RestaurantReviews />} />
       <Route path="/createpost" element={<CreatePost />} />
       <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
     </Routes>

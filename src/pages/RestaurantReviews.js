@@ -6,18 +6,7 @@ import { useParams } from "react-router-dom"
 
 
 export const Review = (props) => {
-    // const { review } = props;
-    // const reviewId = review.id
-    const { reviewId } = useParams();
-    const reviewsRef = doc(db, "reviews", reviewId);
-    const [review, setReview] = useState(null);
-    const getReview = async () => {
-        const doc = await getDoc(reviewsRef);
-        setReview(doc.data());
-    }
-    useEffect(() => {
-        getReview();
-    }, []);
+    const { review } = props;
 
     const [user] = useAuthState(auth);
 
@@ -25,7 +14,7 @@ export const Review = (props) => {
 
     const likesRef = collection(db, "likes");
 
-    const likesDoc = query(likesRef, where("reviewId", "==", reviewId));
+    const likesDoc = query(likesRef, where("reviewId", "==", review.id));
 
     const getLikes = async () => {
         const data = await getDocs(likesDoc);
@@ -34,7 +23,7 @@ export const Review = (props) => {
 
     const addLike = async () => {
      try { 
-        const newDoc = await addDoc(likesRef, { userId: user?.uid, reviewId: reviewId }); 
+        const newDoc = await addDoc(likesRef, { userId: user?.uid, reviewId: review.id }); 
         if (user) {
         setLikes((prev) => prev 
             ? [...prev, {userId: user.uid, likeId: newDoc.id }]
@@ -49,7 +38,7 @@ export const Review = (props) => {
     const unLike = async () => {
         try { 
             const queryLike = query(likesRef, 
-            where("reviewId", "==", reviewId), 
+            where("reviewId", "==", review.id), 
             where("userId", "==", user?.uid) 
            );
 
@@ -72,15 +61,16 @@ export const Review = (props) => {
         getLikes();
     }, []);
 
+    // reviewsList?.forEach((review) => console.log(review))
     return (
         <div className="post">
           <div className="postHeader">
             <div className="title">
-              <h3>{review?.title}</h3>
+              <h3>{review.title}</h3>
             </div>       
           </div>
-          <div className="postTextContainer">{review?.description}</div>
-          <h4 className="userName">@{review?.username}</h4>
+          <div className="postTextContainer">{review.description}</div>
+          <h4 className="userName">@{review.username}</h4>
           <div className="likeContainer">
             {likes && <p className="likes"> Likes: {likes?.length} </p>} 
             <button onClick={isLikedByUser ? unLike : addLike}>
@@ -90,3 +80,24 @@ export const Review = (props) => {
         </div>
     );
 };
+
+export const RestaurantReviews = () => {
+    const { encodedRestaurantName } = useParams();
+    const reviewsRef = collection(db, "reviews");
+    const reviewsDoc = query(reviewsRef, where("title", "==", decodeURIComponent(encodedRestaurantName)))
+    const [reviewsList, setReviewsList] = useState(null);
+    const getReviews = async () => {
+        const data = await getDocs(reviewsDoc);
+        // console.log(data.docs)
+        setReviewsList(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+    }
+    useEffect(() => {
+        getReviews();
+    }, []);
+
+    return (
+      reviewsList?.map((review) => (
+        <Review review={review} />
+      ))
+    );
+}

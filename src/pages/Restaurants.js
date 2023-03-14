@@ -2,16 +2,16 @@ import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom"
-import { Review } from './Review'
 
-export const Reviews = () => {
+export const Restaurants = () => {
   const [reviewsList, setReviewsList] = useState(null);
   const reviewsRef = collection(db, "reviews");
 
   const getReviews = async () => {
     const data = await getDocs(reviewsRef);
+    const restaurants = data.docs.map((doc) => (doc.data().title))
     setReviewsList(
-      data.docs.map((doc) => ({...doc.data(), id: doc.id }))
+      [...new Set(restaurants)]
     );
   };
 
@@ -19,18 +19,16 @@ export const Reviews = () => {
       getReviews();
   }, []);
 
+  console.log(reviewsList)
   return (
     <div>
       {reviewsList?.map((review) => (
       <div>
-        <Link to={review.id}>
+        <Link to={encodeURIComponent(review)}>
             <div className="review-snippets">
-                {review.title}
+                {review}
             </div>
         </Link>
-        {/* {reviewsList?.map((review) => ( */}
-        {/* <Review review={review}/> */}
-        {/* ))} */}
       </div>
       ))}
     </div>
