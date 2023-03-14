@@ -92,11 +92,15 @@ nav {
   height: 70px;
   background-color: #ddbcbc;
   display: flex;
-  justify-content: right;
+  /* justify-content: right; */
   align-items: center;
   color: white;
   text-decoration: none;
   font-family: Georgia, sans-serif;
+}
+
+nav .right-nav {
+  margin-left: auto
 }
 
 a {

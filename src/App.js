@@ -30,24 +30,27 @@ function App() {
   return (
   <Router>
     <nav>
-      <Link to="/"> Home </Link>
+      <span>
+        <Link to="/"> Home </Link>
 
-      {!user ? (
-        <Link to="/login"> Login </Link>
-      ) : (
-        <Link to="/createpost"> Add Review </Link>
-      )}
+        {user ? (
+          <Link to="/createpost"> Add Review </Link>
+        ) : <></>}
+      </span>
 
-      <div className='user'>
-        {user && (
-          <>
-            <div>{user?.displayName}</div>
-            <img src={user?.photoURL || ""} height="30px" width="30px" alt=""/>
-            <button onClick={signUserOut}> Log Out </button>
-          </>
-      )}
+      <div className="right-nav">
+        <span className='user'>
+          {!user ? (
+            <Link to="/login"> Login </Link>
+          ) : (
+              <>
+                <div>{user?.displayName}</div>
+                <img src={user?.photoURL || ""} height="30px" width="30px" alt=""/>
+                <button onClick={signUserOut}> Log Out </button>
+              </>
+            )}
+        </span>
       </div>
-
     </nav>
     <Routes>
       <Route path="/" element={<Home />} />
