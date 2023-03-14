@@ -3,7 +3,7 @@ import Form from '../components/addLocation'
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { useEffect, useState } from 'react';
-import { Review } from "./Review.js";
+import { Review } from "./RestaurantReviews";
 
 function Home() {
   const [reviewsList, setReviewsList] = useState(null);
@@ -30,11 +30,11 @@ function Home() {
 
       <Form />
 
-      {/* <div> */}
-      {/*   {reviewsList?.map((review) => ( */}
-      {/*   <Review review={review}/> */}
-      {/*   ))} */}
-      {/* </div> */}
+      <div>
+        {reviewsList?.map((review) => (
+          <Review review={review}/>
+        ))}
+      </div>
 
     </div>
   );
