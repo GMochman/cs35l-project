@@ -269,35 +269,36 @@ a {
     overflow-y: auto;
   }
 
-  .dropdown-container {
-    text-align: left;
-    border: 1px solid #ccc;
-    position: relative;
-    border-radius: 5px;
-  }
+
   
   .dropdown-input {
+    text-align: left;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 7%;
     padding: 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    user-select: none;
+    transform: translateY(-468px);
+    position: absolute;
+    left: 300px;
   }
 
   .dropdown-menu{
     position: absolute;
-    transform: translateY(4px);
-    width: 100%;
+    left: 300px;
+    transform: translateY(-428px);
+    width: 7%;
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: auto;
-    max-height: 150px;
     background-color: #fff;
   }
 
   .dropdown-item{
     padding: 5px;
-    cursor: pointer
+    cursor: pointer;
   }
 
   .dropdown-item:hover{

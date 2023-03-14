@@ -13,10 +13,10 @@ function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [user] = useAuthState(auth);
   
-  const options = [ {value: "most_recent", label: "Most Recent"}, 
-  {value: "least_recent", label: "Least Recent"}, 
-  {value: "most_liked", label: "Most Liked"},
-  {value: "least_liked", label: "Least Liked"} ];
+  const options = [ {value: "most_recent", label: "Most Recent\n"}, 
+  {value: "least_recent", label: "Least Recent\n"}, 
+  {value: "most_liked", label: "Most Liked\n"},
+  {value: "least_liked", label: "Least Liked\n"} ];
 
   const signUserOut = () => {
     signOut(auth).then(() => {
