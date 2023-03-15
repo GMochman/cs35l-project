@@ -1,58 +1,58 @@
 * { /* removes basic default CSS styles */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
 }
 
 body{
-    background-color: 	#fff5ee;
-    /* makes the background a ombre of two colors, could be cool to add */
-    /* background-image: linear-gradient(120deg, #b0e0e6,	#d8bfd8); */
-    color: 	#ac9b87; /* color of writing and such (prev color: #1e90ff)*/
-    font-family: 'Noto Serif', serif;
-    min-height: 100vh;
+  background-color: 	#fff5ee;
+  /* makes the background a ombre of two colors, could be cool to add */
+  /* background-image: linear-gradient(120deg, #b0e0e6,	#d8bfd8); */
+  color: 	#ac9b87; /* color of writing and such (prev color: #1e90ff)*/
+  font-family: 'Noto Serif', serif;
+  min-height: 100vh;
 }
 
 h1 {
-    font-size: 6rem; /* size of header */
-     /* addds these settings to both header and form (input text for location) */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 175px;
-    margin-bottom: 0.0001px;
-    max-height: 14vh;
+  font-size: 6rem; /* size of header */
+   /* addds these settings to both header and form (input text for location) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 175px;
+  margin-bottom: 0.0001px;
+  max-height: 14vh;
 }
 
 form {
-    min-height: 15vh; /* for spacing between h2 and addLocation item */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  min-height: 15vh; /* for spacing between h2 and addLocation item */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h2 {
-    font-size: 1.3rem;
-    justify-content: center;
-    display: flex;
-    align-items:center;
-    margin-top: 0.00001px;
-    margin-left: 475px;
+  font-size: 1.3rem;
+  justify-content: center;
+  display: flex;
+  align-items:center;
+  margin-top: 0.00001px;
+  margin-left: 475px;
 }
 
 h4 {
-  font-size: 0.9rem;
+font-size: 0.9rem;
 }
 
 form button {
-    padding: 0.4rem; /* search button */
-    font-size: 1.3rem;
-    border: none;
-    margin-top: 0.00001px;
-    background-color: rgb(250, 250, 250);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+  padding: 0.4rem; /* search button */
+  font-size: 1.3rem;
+  border: none;
+  margin-top: 0.00001px;
+  background-color: rgb(250, 250, 250);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 form input 
@@ -83,6 +83,7 @@ form input
 .user img {
   font-size: 15px;
   border-radius: 50%;
+  margin-right: 8px;
   margin-left: 8px;
 }
 
@@ -105,6 +106,11 @@ a {
     margin: 10px;
     font-size: 18px;
   }
+
+a:hover {
+  color: blue;
+  text-decoration: underline;
+}
 
   .createPostPage {
     width: 100%;
@@ -307,3 +313,15 @@ a {
     background-color: #0d6efd;
     color: #fff;
   }
+.review-snippets {
+  width: fit-content;
+  height: auto;
+  max-height: 600px;
+  background-color: #cfc0b0;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 0 auto;
+  display: flex;
+  text-align: center;
+  padding: 20px;
+  border-radius: 15px;
+}
