@@ -225,13 +225,13 @@ textarea {
   padding-top: 20px;
 }
 
-.homePage .post {
+.post {
   width: 600px;
   height: auto;
   max-height: 600px;
   background-color: rgb(250, 250, 250);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin: 20px;
+  margin: 20px auto;
   padding: 20px;
   border-radius: 15px;
 }
@@ -301,4 +301,17 @@ textarea {
   border-radius: 50%;
   margin-right: 8px;
   margin-left: 8px;
+}
+
+.review-snippets {
+  width: fit-content;
+  height: auto;
+  max-height: 600px;
+  background-color: #cfc0b0;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 0 auto;
+  display: flex;
+  text-align: center;
+  padding: 20px;
+  border-radius: 15px;
 }

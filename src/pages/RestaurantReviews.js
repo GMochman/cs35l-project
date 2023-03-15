@@ -1,11 +1,14 @@
-import { addDoc, getDocs, collection, query, where, deleteDoc, doc } from "firebase/firestore";
+import { addDoc, getDoc, getDocs, collection, query, where, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom"
+import Form from '../components/search';
 
 
 export const Review = (props) => {
     const { review, deletePost } = props;
+
     const [user] = useAuthState(auth);
 
     const handleDeletePost = async () => {
@@ -64,6 +67,7 @@ export const Review = (props) => {
         getLikes();
     }, []);
 
+    // reviewsList?.forEach((review) => console.log(review))
     return (
         <div className="post">
           <div className="postHeader">
@@ -87,3 +91,38 @@ export const Review = (props) => {
         </div>
     );
 };
+
+export const RestaurantReviews = () => {
+    const { encodedRestaurantName } = useParams();
+    const reviewsRef = collection(db, "reviews");
+    const reviewsDoc = query(reviewsRef, where("title", "==", decodeURIComponent(encodedRestaurantName)))
+    const [reviewsList, setReviewsList] = useState(null);
+    const [searchKeyword, setSearchKeyword] = useState("");
+    const getReviews = async () => {
+        const data = await getDocs(reviewsDoc);
+        // console.log(data.docs)
+        setReviewsList(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+    }
+    useEffect(() => {
+        getReviews();
+    }, []);
+
+    return (
+      <div>
+      <div className="search-bar">
+      <Form placeHolder={"Find a Review"} isSearching={(event) => 
+      {setSearchKeyword(event.target.value)}}/> 
+     </div>
+      {reviewsList?.filter((review)=> {
+        if (searchKeyword == "") {
+          return review;
+        } else if (review.description.toLowerCase().includes(searchKeyword.toLowerCase()) || 
+        review.title.toLowerCase().includes(searchKeyword.toLowerCase()) || 
+        review.username.toLowerCase().includes(searchKeyword.toLowerCase())) {
+          return review;
+        }}).map((review) => (
+        <Review review={review} />
+      ))}
+      </div>
+    );
+}

@@ -1,11 +1,10 @@
 import React from "react";
-import Form from '../components/addLocation'
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 import { useEffect, useState } from 'react';
-import { Review } from "./Review.js";
 import { useAuthState } from "react-firebase-hooks/auth";
-
+import Form from '../components/search'
+import { Review } from "./RestaurantReviews";
 
 function Home() {
   const [reviewsList, setReviewsList] = useState([]);
@@ -26,13 +25,14 @@ function Home() {
     getReviews();
   }, [deletePost]);
 
+  // console.log(reviewsList)
   return(
     <div className="homePage">
       <h1>The Foodies</h1>
       <div>
         <h2>at ucla</h2>
       </div>
-      
+
       <Form />
 
       <div>
