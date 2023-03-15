@@ -245,6 +245,7 @@ textarea {
 .postHeader .title {
   flex: 50%;
 }
+
 .postHeader .deletePost {
   flex: 50%;
   display: flex;
@@ -254,11 +255,11 @@ textarea {
 
 .deletePost button {
   border: none;
-
   background: none;
   font-size: 30px;
   cursor: pointer;
 }
+
 
 .post .postTextContainer {
   word-wrap: break-word;

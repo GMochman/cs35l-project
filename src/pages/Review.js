@@ -5,8 +5,12 @@ import { useEffect, useState } from "react";
 
 
 export const Review = (props) => {
-    const { review } = props;
+    const { review, deletePost } = props;
     const [user] = useAuthState(auth);
+
+    const handleDeletePost = async () => {
+      await deleteDoc(doc(db, "reviews", review.id));
+    };
 
     const [likes, setLikes] = useState(null);
 
@@ -56,6 +60,7 @@ export const Review = (props) => {
     const isLikedByUser = likes?.find((like) => like.userId === user?.uid);
 
     useEffect(() => {
+      // eslint-disable-next-line
         getLikes();
     }, []);
 
@@ -64,7 +69,12 @@ export const Review = (props) => {
           <div className="postHeader">
             <div className="title">
               <h3>{review.title}</h3>
-            </div>       
+            </div>
+          {review.userId === user?.uid && (
+          <div className="deletePost">
+            <button onClick={handleDeletePost}> &#128465;</button>
+          </div>
+          )}
           </div>
           <div className="postTextContainer">{review.description}</div>
           <h4 className="userName">@{review.username}</h4>
