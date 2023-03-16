@@ -10,6 +10,7 @@ function Home() {
   const [reviewsList, setReviewsList] = useState([]);
   const reviewsRef = collection(db, "reviews");
   const [user] = useAuthState(auth);
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   const deletePost = async(id) => {
     const postDoc = doc(db, "reviews", id);
@@ -33,10 +34,19 @@ function Home() {
         <h2>at ucla</h2>
       </div>
 
-      <Form />
-
-      <div>
-        {reviewsList?.map((review) => {
+      <div className="search-bar">
+      <Form placeHolder={"Find a Review"} isSearching={(event) => 
+      {setSearchKeyword(event.target.value)}}/> 
+     </div>
+    <div>
+        {reviewsList?.filter((review)=> {
+        if (searchKeyword == "") {
+          return review;
+        } else if (review.description.toLowerCase().includes(searchKeyword.toLowerCase()) || 
+        review.title.toLowerCase().includes(searchKeyword.toLowerCase()) || 
+        review.username.toLowerCase().includes(searchKeyword.toLowerCase())) {
+          return review;
+        }}).map((review) => {
         return(
           <div key={review.id}>
             <Review review={review} />
