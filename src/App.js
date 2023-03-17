@@ -49,7 +49,7 @@ function App() {
               <>
                 <div>{user?.displayName}</div>
                 <img src={user?.photoURL || ""} height="30px" width="30px" alt=""/>
-                <button onClick={signUserOut}> Log Out </button>
+                <Link onClick={signUserOut}> Log Out </Link>
               </>
             )}
         </span>

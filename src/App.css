@@ -339,3 +339,43 @@ textarea {
   padding: 20px;
   border-radius: 15px;
 }
+
+.dropdown-input {
+  cursor: pointer;
+  text-align: left;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 8%;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  left: 200px;
+  transform: translateY(-100px);
+}
+
+.dropdown-menu{
+  position: absolute;
+  left: 200px;
+  transform: translateY(-60px);
+  width: 8%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: auto;
+  background-color: #fff;
+}
+
+.dropdown-item{
+  padding: 5px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover{
+  background-color: #757575;
+}
+
+.dropdown-item.selected {
+  background-color: #0d6efd;
+  color: #fff;
+}
