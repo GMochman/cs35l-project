@@ -101,16 +101,35 @@ export const RestaurantReviews = () => {
     const [searchKeyword, setSearchKeyword] = useState("");
     const getReviews = async () => {
         const data = await getDocs(reviewsDoc);
-        // console.log(data.docs)
-        setReviewsList(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+        // console.log(data.docs[0].data())
+        let reviews = data.docs.map((doc) => ({...doc.data(), id: doc.id}))
+        // setReviewsList(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+        if (dropdownSelection !== "") {
+            reviews = reviews.sort((a, b) => {
+                let x = a[dropdownSelection.property].toLowerCase();
+                let y = b[dropdownSelection.property].toLowerCase();
+
+                const order = dropdownSelection.order === "a-z" ? 1 : -1;
+                if(x>y){return 1*order;} 
+                if(x<y){return -1*order;}
+                return 0;
+            })
+        }
+        console.log(reviews)
+        setReviewsList(reviews)
     }
 
-    const options = [ {value: "a-z", label: "A-Z"}, 
-    {value: "z-a", label: "Z-A"}];
+    const [dropdownSelection, setDropdownSelection] = useState("");
+    const options = [
+      {value: {order: "a-z", property: "username"}, label: "A-Z (User)"}, 
+      {value: {order: "z-a", property: "username"}, label: "Z-A (User)"},
+      {value: {order: "a-z", property: "description"}, label: "A-Z (Review)"}, 
+      {value: {order: "z-a", property: "description"}, label: "Z-A (Review)"}
+    ];
 
     useEffect(() => {
         getReviews();
-    }, []);
+    }, [dropdownSelection]);
 
     return (
       <div>
@@ -118,7 +137,8 @@ export const RestaurantReviews = () => {
       <Form placeHolder={"Find a Review"} isSearching={(event) => 
       {setSearchKeyword(event.target.value)}}/> 
      </div>
-     <Dropdown placeHolder={"Sort by..."} options={options}/>
+     <Dropdown placeHolder={"Sort by..."} options={options} onSelection={(value) => setDropdownSelection(value)}/>
+      {console.log(dropdownSelection)}
       {reviewsList?.filter((review)=> {
         if (searchKeyword == "") {
           return review;
