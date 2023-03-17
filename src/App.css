@@ -276,24 +276,25 @@ a:hover {
   }
 
   .dropdown-input {
+    cursor: pointer;
     text-align: left;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 7%;
+    width: 8%;
     padding: 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transform: translateY(-468px);
     position: absolute;
-    left: 300px;
+    left: 200px;
+    transform: translateY(-100px);
   }
 
   .dropdown-menu{
     position: absolute;
-    left: 300px;
-    transform: translateY(-428px);
-    width: 7%;
+    left: 200px;
+    transform: translateY(-60px);
+    width: 8%;
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: auto;
@@ -313,6 +314,7 @@ a:hover {
     background-color: #0d6efd;
     color: #fff;
   }
+  
 .review-snippets {
   width: fit-content;
   height: auto;

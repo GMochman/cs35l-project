@@ -2,18 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Form from '../components/search';
 import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../firebase-config';
-import Dropdown from "../components/Dropdown"
 
 function Home({ isAuth }) {
   const [postLists, setPostList] = useState([]);
   const postsCollectionRef = collection(db, "posts");
 
   const [searchKeyword, setSearchKeyword] = useState(""); 
-
-  const options = [ {value: "most_recent", label: "Most Recent"}, 
-  {value: "least_recent", label: "Least Recent"}, 
-  {value: "most_liked", label: "Most Liked"},
-  {value: "least_liked", label: "Least Liked"} ];
 
   useEffect(() => {
     const getPosts = async() => {
@@ -37,7 +31,6 @@ function Home({ isAuth }) {
       </div>
       <Form placeHolder={"Find a Location"} isSearching={(event) => 
         { setSearchKeyword(event.target.value)}}/> 
-      <Dropdown placeHolder={"Sort by..."} options={options}/>
       {postLists.filter((post)=> {
         if (searchKeyword == "") {
           return post;
