@@ -66,6 +66,9 @@ form button {
   border-bottom-right-radius: 15px;
   cursor: pointer;
 }
+
+form button:hover {
+  background-color: rgb(220, 220, 220);
 }
 
 form input 
@@ -121,6 +124,10 @@ a {
   text-decoration: none;
   margin: 10px;
   font-size: 18px;
+}
+
+a:hover {
+  color: #f3f1ee;
 }
 
 .createPostPage {
