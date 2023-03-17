@@ -17,8 +17,10 @@ UCLA students can use to review and share their favorite food spots, their least
 favorite food spots, or discover new places to eat.
 
 ## 🧳 How to Locally Host App
-1. In the command line, run ```$ npm install```
-2. Then run ```$ npm start```
+1. Open the terminal
+2. Clone the Git repository with ```$ git clone https://github.com/GMochman/cs35l-project```
+3. After cloning, run ```$ npm install``` to install all necessary dependencies
+4. Then run ```$ npm start``` to launch the app
 
 ---
 
