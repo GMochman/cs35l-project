@@ -8,6 +8,9 @@ import { Review } from "./RestaurantReviews";
 
 function Home() {
   const [reviewsList, setReviewsList] = useState([]);
+  const [maxReviewSize, setMaxReviewSize] = useState([0]);
+  const [averageReviewSize, setAverageReviewSize] = useState([0]);
+  const [featuredReviewThreshold, setFeaturedReviewThreshold] = useState([0]);
   const reviewsRef = collection(db, "reviews");
   const [user] = useAuthState(auth);
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -21,6 +24,27 @@ function Home() {
   const getReviews = async () => {
     const data = await getDocs(reviewsRef);
     setReviewsList(data.docs.map((doc) => ({...doc.data(), id: doc.id })));
+
+    var i;
+    for (i = 0; i < reviewsList?.length; i++) {
+      if (maxReviewSize < reviewsList[i].description.length) {
+        setMaxReviewSize(reviewsList[i].description.length);
+      }
+    }
+
+    var j;
+    for (j = 0; j < reviewsList?.length; j++) {
+      if (j == 0) {
+        setAverageReviewSize(reviewsList[i].description.length);
+      }
+      else {
+        setAverageReviewSize((j * averageReviewSize + reviewsList[i].description.length)/(j + 1));
+      }
+    }
+
+    setFeaturedReviewThreshold(((maxReviewSize + 30) + averageReviewSize)/2);
+
+
   };
 
     getReviews();
@@ -38,14 +62,19 @@ function Home() {
       <Form placeHolder={"Find a Review"} isSearching={(event) => 
       {setSearchKeyword(event.target.value)}}/> 
      </div>
+     <div className="featured-reviews-label">
+        <label>Featured Reviews:</label>
+     </div>
     <div>
         {reviewsList?.filter((review)=> {
-        if (searchKeyword == "") {
+        if (searchKeyword == "" && review.description.length >= featuredReviewThreshold) {
           return review;
         } else if (review.description.toLowerCase().includes(searchKeyword.toLowerCase()) || 
         review.title.toLowerCase().includes(searchKeyword.toLowerCase()) || 
         review.username.toLowerCase().includes(searchKeyword.toLowerCase())) {
-          return review;
+          if (review.description.length >= featuredReviewThreshold) {
+            return review;
+          }
         }}).map((review) => {
         return(
           <div key={review.id}>
