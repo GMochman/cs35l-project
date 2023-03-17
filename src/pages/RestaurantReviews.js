@@ -66,7 +66,7 @@ export const Review = (props) => {
     useEffect(() => {
       // eslint-disable-next-line
         getLikes();
-    }, [deletePost]);
+    }, []);
 
     // reviewsList?.forEach((review) => console.log(review))
     return (
@@ -127,9 +127,14 @@ export const RestaurantReviews = () => {
       {value: {order: "z-a", property: "description"}, label: "Z-A (Review)"}
     ];
 
+    const deletePost = async(id) => {
+      const postDoc = doc(db, "reviews", id);
+      await deleteDoc(postDoc);
+    };
+    
     useEffect(() => {
         getReviews();
-    }, [dropdownSelection]);
+    }, [deletePost]);
 
     return (
       <div>
