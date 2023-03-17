@@ -103,9 +103,15 @@ export const RestaurantReviews = () => {
         // console.log(data.docs)
         setReviewsList(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
     }
+
+    const deletePost = async(id) => {
+      const postDoc = doc(db, "reviews", id);
+      await deleteDoc(postDoc);
+    };
+    
     useEffect(() => {
         getReviews();
-    }, []);
+    }, [deletePost]);
 
     return (
       <div>
